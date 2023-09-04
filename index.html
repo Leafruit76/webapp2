@@ -61,22 +61,37 @@
 </head>
 <body>
    <header id="header">
-    <h1><a href="https://script.google.com/a/macros/ishweb.nl/s/AKfycbzCImbpmgsxgDiqvfENQ-HwmhUSdFqd-QCC_W2QXZIY0g45X2hZQ4L01mqUw68qrBi_/exec">My Webapp</a></h1>
+    <h1><a href="https://script.google.com/a/macros/ishweb.nl/s/AKfycbxAyYO7B2SIsmHHlD-3eVzZDmJzSBhTQhuPF9rL0ALD3yEs1eJ7-d873b1oBi7T5Lz-wQ/exec">My Webapp</a></h1>
   </header>
  
 
-  <div id="content">
-    <div class="movie-container">
-      <img src="https://marketplace.canva.com/EAFTl0ixW_k/1/0/1131w/canva-black-white-minimal-alone-movie-poster-YZ-0GJ13Nc8.jpg" alt="Movie 1">
-      <h2>Movie 1</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis urna ac metus aliquet, sit amet vestibulum ligula bibendum. Sed tincidunt ullamcorper enim sed gravida.</p>
-    </div>
+<div id="popular-movies">
+  <h2>Popular Movies</h2>
+  <ul id="popular-movies-list">
+    <!-- Popular movies will be added here dynamically -->
+  </ul>
+</div>
 
-    <div class="movie-container">
-      <img src="https://marketplace.canva.com/EAFH3gODxw4/1/0/1131w/canva-black-%26-white-modern-mystery-forest-movie-poster-rLty9dwhGG4.jpg" alt="Movie 2">
-      <h2>Movie 2</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis urna ac metus aliquet, sit amet vestibulum ligula bibendum. Sed tincidunt ullamcorper enim sed gravida.</p>
-    </div>
+  <script>
+  // Function to update the list of popular movies
+  function updatePopularMoviesList() {
+    google.script.run.withSuccessHandler(function (popularMovies) {
+      var popularMoviesList = document.getElementById("popular-movies-list");
+      popularMoviesList.innerHTML = ""; // Clear the existing list
+
+      // Add popular movies to the list
+      for (var i = 0; i < popularMovies.length; i++) {
+        var movieItem = document.createElement("li");
+        movieItem.textContent = popularMovies[i];
+        popularMoviesList.appendChild(movieItem);
+      }
+    }).getPopularMoviesList();
+  }
+
+  // Call the function to update popular movies when the page loads
+  window.onload = updatePopularMoviesList;
+</script>
+
   </div>
 </body>
 </html>
